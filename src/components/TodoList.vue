@@ -1,7 +1,7 @@
 <template>
   <div class="todo-list">
     <div class="todo-list-input-container">
-      <input class="todo-list-input" v-model="newMessageTitle" />
+      <input class="todo-list-input" v-model="skeletonTodoItem.title" />
       <button v-on:click="addTodo">Add Todo</button>
     </div>
     <todo-item
@@ -11,6 +11,7 @@
       v-on:removeTodo="removeTodo"
     >
     </todo-item>
+    <todo-item v-bind:item="skeletonTodoItem"> </todo-item>
   </div>
 </template>
 
@@ -26,18 +27,17 @@ export default {
         { id: 0, title: "message 1" },
         { id: 1, title: "message 2" },
       ],
-      newMessageTitle: "",
+      skeletonTodoItem: { id: null, title: "", isSkeleton: true },
     };
   },
   methods: {
     addTodo: function() {
       const newId = this.listOfTodos.length;
-      if (this.newMessageTitle.length === 0) return null;
-      this.listOfTodos.push({
-        id: newId,
-        title: this.newMessageTitle,
-      });
-      this.newMessageTitle = "";
+      if (this.skeletonTodoItem.title.length === 0) return null;
+      this.skeletonTodoItem.id = newId;
+      this.skeletonTodoItem.isSkeleton = false;
+      this.listOfTodos.push(this.skeletonTodoItem);
+      this.skeletonTodoItem = { id: null, title: "", isSkeleton: true };
     },
     removeTodo: function(event) {
       this.listOfTodos.splice(this.listOfTodos.indexOf(event), 1);

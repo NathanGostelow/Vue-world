@@ -1,9 +1,13 @@
 <template>
   <div class="todo">
     <div class="todo-title">
-      {{ item.title }}
+      {{ item.title && item.title }}
     </div>
-    <button class="todo-button" v-on:click="$emit('removeTodo', item)">
+    <button
+      class="todo-button"
+      v-on:click="$emit('removeTodo', item)"
+      v-if="!item.isSkeleton"
+    >
       -
     </button>
   </div>
@@ -15,6 +19,7 @@ export default {
   props: {
     item: Object,
     removeTodo: Function,
+    skeletonItem: Object,
   },
 };
 </script>

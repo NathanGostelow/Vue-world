@@ -12,11 +12,6 @@ export default {
   components: {
     TodoList,
   },
-  data: function() {
-    return {
-      inputMessage: "",
-    };
-  },
 };
 </script>
 
@@ -26,12 +21,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #d90368;
+  color: rgb(54, 55, 50);
   margin-top: 60px;
 }
 
 .app-title {
-  color: #d90368;
+  color: rgb(54, 55, 50);
   font-size: 48px;
 }
 </style>
